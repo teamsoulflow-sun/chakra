@@ -81,12 +81,12 @@ export default function App() {
         <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-emerald-500 blur-[120px]" />
       </div>
 
-      <main className="relative z-10 max-w-4xl mx-auto px-6 py-12 min-h-screen flex flex-col">
-        <header className="mb-12 text-center">
+      <main className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12 min-h-screen flex flex-col">
+        <header className="mb-8 sm:mb-12 text-center">
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-6xl font-black tracking-tighter text-[#5A5A40] mb-2"
+            className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter text-[#5A5A40] mb-2"
           >
             SHAKTI
           </motion.h1>
@@ -94,7 +94,7 @@ export default function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="text-sm uppercase tracking-[0.3em] font-sans font-semibold text-[#8a8a70]"
+            className="text-[10px] sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] font-sans font-semibold text-[#8a8a70]"
           >
             Chakra Diagnostic Journey
           </motion.p>
@@ -102,13 +102,13 @@ export default function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
-            className="mt-6"
+            className="mt-4 sm:mt-6 px-4"
           >
             <a
               href="https://soulgrow.my.canva.site/lp-zen-gym-2-0"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs font-sans font-bold uppercase tracking-[0.2em] text-orange-600 hover:text-orange-700 underline underline-offset-4 transition-colors"
+              className="text-[9px] sm:text-xs font-sans font-bold uppercase tracking-[0.1em] sm:tracking-[0.2em] text-orange-600 hover:text-orange-700 underline underline-offset-4 transition-colors"
             >
               Join Zen Gym 2.0 with Sanchari Niranjan
             </a>
@@ -140,17 +140,17 @@ export default function App() {
               </div>
 
               <div className="space-y-4 max-w-2xl">
-                <h2 className="text-3xl md:text-4xl font-medium leading-tight">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-medium leading-tight">
                   Discover the Divine Energy Within You
                 </h2>
-                <p className="text-lg text-[#4a4a3a] leading-relaxed">
+                <p className="text-base sm:text-lg text-[#4a4a3a] leading-relaxed px-2">
                   Namaste, Shakti. Your chakras are the spinning wheels of energy that govern your physical, emotional, and spiritual well-being. Take this fun 10-question journey to find out where you stand today.
                 </p>
               </div>
 
               <button
                 onClick={() => setState('quiz')}
-                className="group relative px-12 py-4 bg-[#5A5A40] text-white rounded-full font-sans font-bold text-lg overflow-hidden transition-all hover:shadow-2xl hover:scale-105 active:scale-95"
+                className="group relative px-8 sm:px-12 py-3 sm:py-4 bg-[#5A5A40] text-white rounded-full font-sans font-bold text-base sm:text-lg overflow-hidden transition-all hover:shadow-2xl hover:scale-105 active:scale-95"
               >
                 <span className="relative z-10 flex items-center gap-2">
                   Begin the Journey <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -158,12 +158,12 @@ export default function App() {
                 <div className="absolute inset-0 bg-gradient-to-r from-orange-400/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               </button>
 
-              <div className="pt-4">
+              <div className="pt-2 sm:pt-4">
                 <a
                   href="https://soulgrow.my.canva.site/lp-zen-gym-2-0"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-8 py-3 rounded-full border border-orange-200 text-orange-700 font-sans font-bold hover:bg-orange-50 transition-all"
+                  className="flex items-center gap-2 px-6 sm:px-8 py-2 sm:py-3 rounded-full border border-orange-200 text-orange-700 font-sans font-bold text-sm sm:text-base hover:bg-orange-50 transition-all"
                 >
                   <Sparkles className="w-4 h-4" /> Register for Zen Gym 2.0
                 </a>
@@ -194,24 +194,24 @@ export default function App() {
               </div>
 
               <div className="space-y-8">
-                <h3 className="text-2xl md:text-3xl font-medium leading-snug">
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-medium leading-snug">
                   {currentQuestion.text}
                 </h3>
 
-                <div className="grid gap-4">
+                <div className="grid gap-3 sm:gap-4">
                   {currentQuestion.options.map((option, idx) => (
                     <motion.button
                       key={idx}
-                      whileHover={{ x: 10 }}
+                      whileHover={{ x: 5 }}
                       whileTap={{ scale: 0.98 }}
                       onClick={() => handleAnswer(option.impact)}
-                      className="text-left p-6 rounded-2xl border border-[#d5d5cf] bg-white/50 hover:bg-white hover:border-[#5A5A40] hover:shadow-lg transition-all group"
+                      className="text-left p-4 sm:p-6 rounded-2xl border border-[#d5d5cf] bg-white/50 hover:bg-white hover:border-[#5A5A40] hover:shadow-lg transition-all group"
                     >
-                      <div className="flex items-center gap-4">
-                        <span className="w-8 h-8 rounded-full border border-[#d5d5cf] flex items-center justify-center text-xs font-sans font-bold group-hover:bg-[#5A5A40] group-hover:text-white group-hover:border-transparent transition-colors">
+                      <div className="flex items-center gap-3 sm:gap-4">
+                        <span className="shrink-0 w-8 h-8 rounded-full border border-[#d5d5cf] flex items-center justify-center text-xs font-sans font-bold group-hover:bg-[#5A5A40] group-hover:text-white group-hover:border-transparent transition-colors">
                           {String.fromCharCode(65 + idx)}
                         </span>
-                        <span className="text-lg">{option.text}</span>
+                        <span className="text-base sm:text-lg leading-tight">{option.text}</span>
                       </div>
                     </motion.button>
                   ))}
@@ -266,14 +266,14 @@ export default function App() {
               key="report"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              className="flex-1 space-y-12 pb-20"
+              className="flex-1 space-y-6 sm:space-y-12 pb-20"
             >
-              <section className="bg-white rounded-[40px] p-8 md:p-12 shadow-xl border border-[#e5e5df]">
-                <div className="flex flex-col md:flex-row gap-12 items-start">
-                  <div className="w-full md:w-1/3 flex flex-col items-center gap-6 sticky top-8">
-                    <div className="relative py-12 flex flex-col items-center">
+              <section className="bg-white rounded-[32px] sm:rounded-[40px] p-5 sm:p-8 md:p-12 shadow-xl border border-[#e5e5df]">
+                <div className="flex flex-col lg:flex-row gap-8 sm:gap-12 items-start">
+                  <div className="w-full lg:w-1/3 flex flex-col items-center gap-6 lg:sticky lg:top-8 order-2 lg:order-1">
+                    <div className="relative py-8 sm:py-12 flex flex-col items-center w-full">
                       {/* Vertical Line */}
-                      <div className="absolute top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[#d5d5cf] to-transparent" />
+                      <div className="absolute top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[#d5d5cf] to-transparent hidden lg:block" />
 
                       <div className="flex flex-col items-center gap-8 relative z-10">
                         {results.slice().reverse().map((res, i) => {
@@ -359,20 +359,20 @@ export default function App() {
                     The Path to Mastery
                   </motion.div>
 
-                  <h2 className="text-4xl md:text-5xl font-medium leading-tight max-w-2xl">
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium leading-tight max-w-2xl">
                     Take Your Healing Journey Deeper with Zen Gym 2.0
                   </h2>
 
-                  <p className="text-lg md:text-xl text-stone-200 font-serif leading-relaxed max-w-3xl">
+                  <p className="text-base sm:text-lg md:text-xl text-stone-200 font-serif leading-relaxed max-w-3xl">
                     Namaste, Shakti. While these results offer a mirror to your current energy, true transformation requires a sacred container. In **Zen Gym 2.0**, **Sanchari Niranjan** personally guides you through the practices that balance your Prana and unlock your true potential.
                   </p>
 
-                  <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 w-full sm:w-auto">
                     <a
                       href="https://soulgrow.my.canva.site/lp-zen-gym-2-0"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group relative px-10 py-4 bg-orange-400 text-[#1a1a1a] rounded-full font-sans font-black text-lg overflow-hidden transition-all hover:shadow-[0_0_30px_rgba(251,146,60,0.5)] hover:scale-105 active:scale-95 text-center"
+                      className="group relative px-8 sm:px-10 py-3 sm:py-4 bg-orange-400 text-[#1a1a1a] rounded-full font-sans font-black text-base sm:text-lg overflow-hidden transition-all hover:shadow-[0_0_30px_rgba(251,146,60,0.5)] hover:scale-105 active:scale-95 text-center"
                     >
                       Enroll in Zen Gym 2.0
                     </a>
@@ -380,7 +380,7 @@ export default function App() {
                       href="https://soulgrow.my.canva.site/lp-zen-gym-2-0"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-10 py-4 border border-white/30 rounded-full font-sans font-bold text-lg hover:bg-white/10 transition-all text-center"
+                      className="px-8 sm:px-10 py-3 sm:py-4 border border-white/30 rounded-full font-sans font-bold text-base sm:text-lg hover:bg-white/10 transition-all text-center"
                     >
                       Learn More
                     </a>
