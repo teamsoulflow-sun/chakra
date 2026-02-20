@@ -269,13 +269,13 @@ export default function App() {
               className="flex-1 space-y-6 sm:space-y-12 pb-20"
             >
               <section className="bg-white rounded-[32px] sm:rounded-[40px] p-5 sm:p-8 md:p-12 shadow-xl border border-[#e5e5df]">
-                <div className="flex flex-col lg:flex-row gap-8 sm:gap-12 items-start">
+                <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-start">
                   <div className="w-full lg:w-1/3 flex flex-col items-center gap-6 lg:sticky lg:top-8 order-2 lg:order-1">
-                    <div className="relative py-8 sm:py-12 flex flex-col items-center w-full">
-                      {/* Vertical Line */}
+                    <div className="relative py-6 lg:py-12 flex flex-col items-center w-full bg-[#fcfcf8] lg:bg-transparent rounded-3xl lg:rounded-none p-6 lg:p-0 border border-[#e5e5df] lg:border-none">
+                      {/* Vertical Line - Hidden on Mobile */}
                       <div className="absolute top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[#d5d5cf] to-transparent hidden lg:block" />
 
-                      <div className="flex flex-col items-center gap-8 relative z-10">
+                      <div className="flex flex-col items-center gap-6 sm:gap-8 relative z-10 w-full">
                         {results.slice().reverse().map((res, i) => {
                           const chakra = CHAKRAS.find(c => c.id === res.chakraId)!;
                           return (
@@ -284,28 +284,21 @@ export default function App() {
                               initial={{ opacity: 0, x: -20 }}
                               animate={{ opacity: 1, x: 0 }}
                               transition={{ delay: i * 0.1 }}
-                              className="flex items-center gap-6 w-full group"
+                              className="flex items-center gap-4 sm:gap-6 w-full group"
                             >
-                              <div className="relative">
+                              <div className="relative shrink-0">
                                 <ChakraIcon chakra={chakra} status={res.status} size="sm" />
-                                {res.status === 'overflowing' && (
-                                  <motion.div
-                                    animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
-                                    transition={{ duration: 2, repeat: Infinity }}
-                                    className="absolute inset-0 rounded-full bg-white blur-md -z-10"
-                                  />
-                                )}
                               </div>
-                              <div className="flex-1 min-w-[120px]">
-                                <div className="flex justify-between text-[10px] uppercase tracking-widest font-sans font-bold mb-1">
+                              <div className="flex-1">
+                                <div className="flex justify-between items-center text-[10px] uppercase tracking-widest font-sans font-bold mb-1.5">
                                   <span className="text-[#5A5A40]">{chakra.name}</span>
                                   <span className={cn(
-                                    "px-1.5 py-0.5 rounded-sm",
+                                    "px-2 py-0.5 rounded text-[9px]",
                                     res.status === 'balanced' ? 'bg-emerald-100 text-emerald-700' :
                                       res.status === 'overflowing' || res.status === 'overactive' ? 'bg-orange-100 text-orange-700' : 'bg-red-100 text-red-700'
                                   )}>{res.status}</span>
                                 </div>
-                                <div className="h-1.5 bg-[#f5f5f0] rounded-full overflow-hidden shadow-inner">
+                                <div className="h-2 bg-[#f0f0e8] rounded-full overflow-hidden shadow-inner border border-[#e5e5df]/50">
                                   <motion.div
                                     initial={{ width: 0 }}
                                     animate={{ width: `${Math.min(100, Math.max(5, (res.score + 5) * 10))}%` }}
@@ -319,60 +312,67 @@ export default function App() {
                         })}
                       </div>
                     </div>
-                    <button
-                      onClick={reset}
-                      className="group flex items-center gap-2 px-6 py-3 rounded-full border border-[#d5d5cf] text-xs font-sans font-bold uppercase tracking-widest text-[#8a8a70] hover:text-[#5A5A40] hover:border-[#5A5A40] transition-all"
-                    >
-                      <RefreshCw className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500" /> Retake Diagnostic
-                    </button>
 
-                    <a
-                      href="https://soulgrow.my.canva.site/lp-zen-gym-2-0"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full mt-4 group flex items-center justify-center gap-2 px-6 py-4 rounded-full bg-orange-400 text-[#1a1a1a] text-xs font-sans font-bold uppercase tracking-widest hover:shadow-[0_0_20px_rgba(251,146,60,0.4)] hover:scale-105 active:scale-95 transition-all text-center"
-                    >
-                      Enroll in Zen Gym 2.0
-                    </a>
+                    <div className="flex flex-col gap-3 w-full max-w-sm">
+                      <button
+                        onClick={reset}
+                        className="group flex items-center justify-center gap-2 px-6 py-4 rounded-full border border-[#d5d5cf] text-[10px] font-sans font-bold uppercase tracking-widest text-[#8a8a70] hover:text-[#5A5A40] hover:border-[#5A5A40] transition-all bg-white"
+                      >
+                        <RefreshCw className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500" /> Retake Diagnostic
+                      </button>
+
+                      <a
+                        href="https://soulgrow.my.canva.site/lp-zen-gym-2-0"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group flex items-center justify-center gap-2 px-6 py-4 rounded-full bg-orange-500 text-white text-[10px] font-sans font-bold uppercase tracking-widest hover:shadow-xl hover:bg-orange-600 transition-all text-center"
+                      >
+                        Enroll in Zen Gym 2.0
+                      </a>
+                    </div>
+
+                    <div className="mt-4 p-4 rounded-2xl bg-stone-50 border border-stone-200 w-full max-w-sm text-center">
+                      <p className="text-[10px] text-stone-500 uppercase tracking-widest mb-2">Guided by</p>
+                      <p className="font-serif text-lg font-medium text-[#5A5A40]">Sanchari Niranjan</p>
+                      <p className="text-[11px] text-[#8a8a70] mt-1 italic">Chakra & Prana Master Guide</p>
+                    </div>
                   </div>
 
-                  <div className="w-full md:w-2/3 prose prose-stone prose-lg max-w-none">
-                    <div className="markdown-body">
+                  <div className="w-full lg:w-2/3 prose prose-stone prose-base sm:prose-lg max-w-none order-1 lg:order-2">
+                    <div className="markdown-body p-2 sm:p-0">
                       <Markdown>{report || ''}</Markdown>
                     </div>
                   </div>
                 </div>
               </section>
 
-              <section className="bg-gradient-to-br from-[#5A5A40] to-[#3D3D2B] text-white p-8 md:p-12 rounded-[40px] shadow-2xl relative overflow-hidden group">
-                {/* Decorative background energy */}
-                <div className="absolute top-0 right-0 w-64 h-64 bg-orange-400/10 rounded-full blur-[80px] group-hover:bg-orange-400/20 transition-all duration-1000" />
-                <div className="absolute bottom-0 left-0 w-64 h-64 bg-emerald-400/10 rounded-full blur-[80px] group-hover:bg-emerald-400/20 transition-all duration-1000" />
+              <section className="bg-gradient-to-br from-[#5A5A40] to-[#3D3D2B] text-white p-6 sm:p-12 rounded-[32px] sm:rounded-[40px] shadow-2xl relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-orange-400/10 rounded-full blur-[80px]" />
+                <div className="absolute bottom-0 left-0 w-64 h-64 bg-emerald-400/10 rounded-full blur-[80px]" />
 
                 <div className="relative z-10 flex flex-col items-center text-center space-y-6">
-                  <motion.div
-                    initial={{ scale: 0.9, opacity: 0 }}
-                    whileInView={{ scale: 1, opacity: 1 }}
-                    viewport={{ once: true }}
-                    className="inline-block px-4 py-1 rounded-full border border-orange-300/30 bg-orange-300/10 text-orange-200 text-xs font-sans font-bold uppercase tracking-widest"
-                  >
+                  <div className="inline-block px-4 py-1 rounded-full border border-orange-300/30 bg-orange-300/10 text-orange-200 text-[10px] font-sans font-bold uppercase tracking-widest">
                     The Path to Mastery
-                  </motion.div>
+                  </div>
 
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium leading-tight max-w-2xl">
+                  <h2 className="text-2xl sm:text-4xl md:text-5xl font-medium leading-tight max-w-2xl px-2">
                     Take Your Healing Journey Deeper with Zen Gym 2.0
                   </h2>
 
-                  <p className="text-base sm:text-lg md:text-xl text-stone-200 font-serif leading-relaxed max-w-3xl">
-                    Namaste, Shakti. While these results offer a mirror to your current energy, true transformation requires a sacred container. In **Zen Gym 2.0**, **Sanchari Niranjan** personally guides you through the practices that balance your Prana and unlock your true potential.
+                  <p className="text-base sm:text-lg md:text-xl text-stone-200 font-serif leading-relaxed max-w-3xl px-4 italic">
+                    "True healing happens when you align your energy with your purpose."
                   </p>
 
-                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 w-full sm:w-auto">
+                  <p className="text-sm sm:text-base md:text-lg text-stone-300 font-sans leading-relaxed max-w-2xl px-4">
+                    Join **Sanchari Niranjan** in a sacred container designed for the modern Shakti. Balance your Prana, master your mindset, and unlock your true potential through ancient wisdom and practical tools.
+                  </p>
+
+                  <div className="flex flex-col sm:flex-row gap-4 pt-4 w-full sm:w-auto px-6">
                     <a
                       href="https://soulgrow.my.canva.site/lp-zen-gym-2-0"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group relative px-8 sm:px-10 py-3 sm:py-4 bg-orange-400 text-[#1a1a1a] rounded-full font-sans font-black text-base sm:text-lg overflow-hidden transition-all hover:shadow-[0_0_30px_rgba(251,146,60,0.5)] hover:scale-105 active:scale-95 text-center"
+                      className="group px-10 py-4 bg-orange-400 text-[#1a1a1a] rounded-full font-sans font-black text-lg hover:shadow-2xl transition-all text-center"
                     >
                       Enroll in Zen Gym 2.0
                     </a>
@@ -380,7 +380,7 @@ export default function App() {
                       href="https://soulgrow.my.canva.site/lp-zen-gym-2-0"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-8 sm:px-10 py-3 sm:py-4 border border-white/30 rounded-full font-sans font-bold text-base sm:text-lg hover:bg-white/10 transition-all text-center"
+                      className="px-10 py-4 border border-white/30 rounded-full font-sans font-bold text-lg hover:bg-white/10 transition-all text-center"
                     >
                       Learn More
                     </a>

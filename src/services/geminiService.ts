@@ -1,8 +1,10 @@
-import { GoogleGenAI, Type } from "@google/genai";
-import { DiagnosticResult, ChakraStatus } from "../types";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import { DiagnosticResult } from "../types";
 import { CHAKRAS } from "../constants";
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || "" });
+// Using VITE_ prefix for environment variables in Vite projects
+const API_KEY = process.env.GEMINI_API_KEY || "";
+const genAI = new GoogleGenerativeAI(API_KEY);
 
 export async function generateDiagnosticReport(results: DiagnosticResult[]) {
   const chakraData = results.map(r => {
@@ -34,14 +36,19 @@ export async function generateDiagnosticReport(results: DiagnosticResult[]) {
   `;
 
   try {
-    const response = await ai.models.generateContent({
-      model: "gemini-2.0-flash",
-      contents: prompt,
-    });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const text = response.text();
 
-    return response.text || "I'm sorry, I couldn't generate your report at this time. Please try again later.";
-  } catch (error) {
+    return text || "I'm sorry, I couldn't generate your report at this time. Please try again later.";
+  } catch (error: any) {
     console.error("Error generating report:", error);
-    return "The cosmic energies are a bit tangled right now. Please try again in a moment.";
+
+    if (error?.message?.includes('429')) {
+      return "The cosmic energies are receiving too many requests right now (API Quota Exceeded). Please wait a minute and try clicking 'Retake' or refreshing the page. Your Shakti journey is worth the wait!";
+    }
+
+    return "The cosmic energies are a bit tangled right now. Please check your API key or connection and try again.";
   }
 }
