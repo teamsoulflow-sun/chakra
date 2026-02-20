@@ -98,6 +98,21 @@ export default function App() {
           >
             Chakra Diagnostic Journey
           </motion.p>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            className="mt-6"
+          >
+            <a
+              href="https://soulgrow.my.canva.site/lp-zen-gym-2-0"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-sans font-bold uppercase tracking-[0.2em] text-orange-600 hover:text-orange-700 underline underline-offset-4 transition-colors"
+            >
+              Join Zen Gym 2.0 with Sanchari Niranjan
+            </a>
+          </motion.div>
         </header>
 
         <AnimatePresence mode="wait">
@@ -142,6 +157,17 @@ export default function App() {
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-orange-400/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               </button>
+
+              <div className="pt-4">
+                <a
+                  href="https://soulgrow.my.canva.site/lp-zen-gym-2-0"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-8 py-3 rounded-full border border-orange-200 text-orange-700 font-sans font-bold hover:bg-orange-50 transition-all"
+                >
+                  <Sparkles className="w-4 h-4" /> Register for Zen Gym 2.0
+                </a>
+              </div>
             </motion.div>
           )}
 
@@ -299,6 +325,15 @@ export default function App() {
                     >
                       <RefreshCw className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500" /> Retake Diagnostic
                     </button>
+
+                    <a
+                      href="https://soulgrow.my.canva.site/lp-zen-gym-2-0"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full mt-4 group flex items-center justify-center gap-2 px-6 py-4 rounded-full bg-orange-400 text-[#1a1a1a] text-xs font-sans font-bold uppercase tracking-widest hover:shadow-[0_0_20px_rgba(251,146,60,0.4)] hover:scale-105 active:scale-95 transition-all text-center"
+                    >
+                      Enroll in Zen Gym 2.0
+                    </a>
                   </div>
 
                   <div className="w-full md:w-2/3 prose prose-stone prose-lg max-w-none">
