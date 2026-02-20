@@ -45,21 +45,21 @@ export default function App() {
 
   const calculateResults = async (finalAnswers: Record<string, number>) => {
     setState('analyzing');
-    
+
     const diagnosticResults: DiagnosticResult[] = CHAKRAS.map(chakra => {
       const score = finalAnswers[chakra.id] || 0;
       let status: ChakraStatus = 'balanced';
-      
+
       if (score <= -2) status = 'blocked';
       else if (score < 0) status = 'underactive';
       else if (score > 4) status = 'overflowing';
       else if (score > 2) status = 'overactive';
-      
+
       return { chakraId: chakra.id, score, status };
     });
 
     setResults(diagnosticResults);
-    
+
     const generatedReport = await generateDiagnosticReport(diagnosticResults);
     setReport(generatedReport);
     setState('report');
@@ -83,14 +83,14 @@ export default function App() {
 
       <main className="relative z-10 max-w-4xl mx-auto px-6 py-12 min-h-screen flex flex-col">
         <header className="mb-12 text-center">
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-5xl md:text-6xl font-black tracking-tighter text-[#5A5A40] mb-2"
           >
             SHAKTI
           </motion.h1>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
@@ -159,7 +159,7 @@ export default function App() {
                   <p className="text-4xl font-black text-[#5A5A40]">{currentQuestionIndex + 1}<span className="text-xl text-[#8a8a70]/50"> / {QUESTIONS.length}</span></p>
                 </div>
                 <div className="w-32 h-1 bg-[#e5e5df] rounded-full overflow-hidden">
-                  <motion.div 
+                  <motion.div
                     className="h-full bg-[#5A5A40]"
                     initial={{ width: 0 }}
                     animate={{ width: `${((currentQuestionIndex + 1) / QUESTIONS.length) * 100}%` }}
@@ -215,12 +215,12 @@ export default function App() {
                       scale: { duration: 2, repeat: Infinity, ease: "easeInOut", delay: i * 0.2 }
                     }}
                   >
-                    <div 
-                      className="w-4 h-4 rounded-full" 
-                      style={{ 
+                    <div
+                      className="w-4 h-4 rounded-full"
+                      style={{
                         backgroundColor: c.color,
                         transform: `translateY(${60 + i * 10}px)`
-                      }} 
+                      }}
                     />
                   </motion.div>
                 ))}
@@ -248,13 +248,13 @@ export default function App() {
                     <div className="relative py-12 flex flex-col items-center">
                       {/* Vertical Line */}
                       <div className="absolute top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[#d5d5cf] to-transparent" />
-                      
+
                       <div className="flex flex-col items-center gap-8 relative z-10">
                         {results.slice().reverse().map((res, i) => {
                           const chakra = CHAKRAS.find(c => c.id === res.chakraId)!;
                           return (
-                            <motion.div 
-                              key={res.chakraId} 
+                            <motion.div
+                              key={res.chakraId}
                               initial={{ opacity: 0, x: -20 }}
                               animate={{ opacity: 1, x: 0 }}
                               transition={{ delay: i * 0.1 }}
@@ -263,7 +263,7 @@ export default function App() {
                               <div className="relative">
                                 <ChakraIcon chakra={chakra} status={res.status} size="sm" />
                                 {res.status === 'overflowing' && (
-                                  <motion.div 
+                                  <motion.div
                                     animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
                                     transition={{ duration: 2, repeat: Infinity }}
                                     className="absolute inset-0 rounded-full bg-white blur-md -z-10"
@@ -275,12 +275,12 @@ export default function App() {
                                   <span className="text-[#5A5A40]">{chakra.name}</span>
                                   <span className={cn(
                                     "px-1.5 py-0.5 rounded-sm",
-                                    res.status === 'balanced' ? 'bg-emerald-100 text-emerald-700' : 
-                                    res.status === 'overflowing' || res.status === 'overactive' ? 'bg-orange-100 text-orange-700' : 'bg-red-100 text-red-700'
+                                    res.status === 'balanced' ? 'bg-emerald-100 text-emerald-700' :
+                                      res.status === 'overflowing' || res.status === 'overactive' ? 'bg-orange-100 text-orange-700' : 'bg-red-100 text-red-700'
                                   )}>{res.status}</span>
                                 </div>
                                 <div className="h-1.5 bg-[#f5f5f0] rounded-full overflow-hidden shadow-inner">
-                                  <motion.div 
+                                  <motion.div
                                     initial={{ width: 0 }}
                                     animate={{ width: `${Math.min(100, Math.max(5, (res.score + 5) * 10))}%` }}
                                     className="h-full shadow-[0_0_8px_rgba(0,0,0,0.1)]"
@@ -306,6 +306,54 @@ export default function App() {
                       <Markdown>{report || ''}</Markdown>
                     </div>
                   </div>
+                </div>
+              </section>
+
+              <section className="bg-gradient-to-br from-[#5A5A40] to-[#3D3D2B] text-white p-8 md:p-12 rounded-[40px] shadow-2xl relative overflow-hidden group">
+                {/* Decorative background energy */}
+                <div className="absolute top-0 right-0 w-64 h-64 bg-orange-400/10 rounded-full blur-[80px] group-hover:bg-orange-400/20 transition-all duration-1000" />
+                <div className="absolute bottom-0 left-0 w-64 h-64 bg-emerald-400/10 rounded-full blur-[80px] group-hover:bg-emerald-400/20 transition-all duration-1000" />
+
+                <div className="relative z-10 flex flex-col items-center text-center space-y-6">
+                  <motion.div
+                    initial={{ scale: 0.9, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true }}
+                    className="inline-block px-4 py-1 rounded-full border border-orange-300/30 bg-orange-300/10 text-orange-200 text-xs font-sans font-bold uppercase tracking-widest"
+                  >
+                    The Path to Mastery
+                  </motion.div>
+
+                  <h2 className="text-4xl md:text-5xl font-medium leading-tight max-w-2xl">
+                    Take Your Healing Journey Deeper with Zen Gym 2.0
+                  </h2>
+
+                  <p className="text-lg md:text-xl text-stone-200 font-serif leading-relaxed max-w-3xl">
+                    Namaste, Shakti. While these results offer a mirror to your current energy, true transformation requires a sacred container. In **Zen Gym 2.0**, **Sanchari Niranjan** personally guides you through the practices that balance your Prana and unlock your true potential.
+                  </p>
+
+                  <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                    <a
+                      href="https://soulgrow.my.canva.site/lp-zen-gym-2-0"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group relative px-10 py-4 bg-orange-400 text-[#1a1a1a] rounded-full font-sans font-black text-lg overflow-hidden transition-all hover:shadow-[0_0_30px_rgba(251,146,60,0.5)] hover:scale-105 active:scale-95 text-center"
+                    >
+                      Enroll in Zen Gym 2.0
+                    </a>
+                    <a
+                      href="https://soulgrow.my.canva.site/lp-zen-gym-2-0"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-10 py-4 border border-white/30 rounded-full font-sans font-bold text-lg hover:bg-white/10 transition-all text-center"
+                    >
+                      Learn More
+                    </a>
+                  </div>
+
+                  <p className="text-xs text-stone-400 uppercase tracking-widest font-sans">
+                    Limited intake for the Divine Feminine cohort
+                  </p>
                 </div>
               </section>
 
